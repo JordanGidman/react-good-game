@@ -1,0 +1,99 @@
+--- Good Game ---
+A video game review platform, letterbox'd for games
+
+This probably needs to be made using server-side rendering to improve the performance
+
+USER STORIES
+As a user i want to sign in/up
+As a user i want a profile page where i can edit my profile and gives info similar to letterboxd i.e. amount of reviewed games 
+As a user i want to be able to search up any video game
+As a user i want to be able to search other users
+As a user i want to see what others have rated a game
+As a user i want to be able to leave a rating for game both a score and a comment
+As a user i want to be able to see other users comments
+As a user i want to have a list of all games i have reviewed that i can add to change or delete
+As a user i want to be able to sort my reviews by rating, name, release date, genre
+As a user i want a dashboard screen that shows highly rated films by others as well as my recent ratings
+As a user i want my review post for each gameve the ability to be liked by others and display an amount of likes
+As a user i want to see what others who have used the site have rated the games
+As a user i want to search for games, not to rate but to see others comments and ratings
+As a user i want to have a play list of games that i gave yet to play but want to
+
+
+
+FEATURE LIST
+-Sign up through firebase auth
+-Profile Page
+-Search for games
+-Search other users
+-Rate and review games / see others ratings and reviews 
+-Store a list for each user once reviewed
+-Show a general rating derrived from all users reviews of that game
+-Have a page where each user can see their reviewed games with a total number of reviews and sorting mechanics
+-A homepage showing some highly reviewed games based on its average rating from users
+-Create, read, update, delete reviews
+-liking system for review comments
+-Play list that a user can add games they haven't played yet but want to
+
+FEATURE CATEGORIES
+-Authentication
+-Games
+-Reviews
+
+CODE STEPS / ARCHITECTURE
+-I will need firebase to do the sign ups and auth as well as storing the reviews 
+-I will use an AuthContext to send the logged in user throughout the app to keep their profile present in the nav at all times and wherever the auth is needed such as making a review etc
+-I will use an API to allow the user to search for the game they want to review. I will use debouncing to ensure we are only making the requests to the API when the user has stopped typing
+-I will need multiple pages. So i will use react-router for the navigation around page
+	-I will need a page for Sign In  "/signin"
+	-I will need a page for Sign Up  "/signup"
+	-I will need a homepage "/home"
+	-I will need a profile page "/users/:userID"
+	-I will need a page for reviewing games "/newReview"
+	-I will need a page for searching games. we will initially show 25ish popular games on the page and then change the ones shown when the user begins typing to fit what they entered "/games"
+	-I will then need a page for when a user clicks a movie that will show all the game info and the comments / ratings from other users. "/games/:gameID"
+	-I will need a page for all the logged in users reviews so they can see and amend them any time "/userID/my-reviews"
+-I may use redux for the storing of the UI state. I am undecided yet but i do want to practice
+
+COMPONENTS
+-AppLayout - As we will be using react-router we want to use this component with the Outlet component from router to render the current outlet based on the URL
+-Nav - The navbar that will allow the user to navigate as well as see their profile and have a button to review a game
+-Home - This will just contain some highlight information 
+-SearchGames - this will be a simple input field and button that allows the user to search for a game to pull from the API.
+-Games - This is the component for searching movies to see the concensus rather than leaving a review
+-Game - This will be a component for when a game is clicked to give all the info about it and where we will show the review form
+-Error - For error handling
+-Button - I will have a custom button component that we will use throughout the application
+-ReviewForm - this is the component we will show the user that allows them to leave their own review 
+	-SearchGames - we will also use the searchGames comp here as well to allow the user the find the game they want to review
+-Profile - This comp will show the user all of their info where it can be edited as necessary
+-MyReviews - This will be a page that contains all the logged in users reviews and comments
+-PlayList - This will be a page that looks the game as the myReviews more or less but will contain a list of games added by the user that they want to play
+
+STATE MANAGEMENT
+-I will be using a lot of remote state which will be loaded and mutated many times so we will need react-query here
+-I will handle UI state with the Context API
+
+DATABASE ARCHITECTURE
+-Firebase Auth for user authentication
+-I will need a cloud storage bucket for the users Profile picture 
+-I will need a database for userData
+-I will need a database for all reviews (i will store each review in the reviews db which will have an id === id of the user who made it but will contain the review likes, score and review so we can display each review on the games page itself with the profile picture and name of the person who made it as well as its likes)
+
+
+API'S
+
+STACK
+-HTML/CSS 
+-JavaScript
+-React + react-router
+-Firebase
+-Vite
+
+
+LIBRARIES
+-React toast
+-React Query
+-
+
+
